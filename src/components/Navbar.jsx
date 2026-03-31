@@ -28,7 +28,7 @@ const Navbar = () => {
     <nav 
       className={`fixed w-full z-50 transition-all duration-300 border-b ${
         isScrolled 
-          ? 'glass py-3 border-slate-200/60' 
+          ? 'bg-white/80 backdrop-blur-md shadow-sm py-3 border-slate-200' 
           : 'bg-slate-900/20 backdrop-blur-md py-5 border-white/5'
       }`}
     >
