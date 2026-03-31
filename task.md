@@ -1,0 +1,10 @@
+- `[x]` Alapvető CSS és belépési pontok (index.css, App.jsx, main.jsx)
+- `[x]` Navbar komponens elkészítése (Sticky, Reszponzív)
+- `[x]` Hero komponens elkészítése (Háttérkép, Fő CTA)
+- `[x]` Services komponens elkészítése (3 kártya, ikonok)
+- `[x]` Process komponens elkészítése (Lépésről lépésre folyamatábra)
+- `[x]` BeforeAfter komponens elkészítése (Interaktív csúszka)
+- `[x]` Testimonials komponens elkészítése (Trustindex vélemények)
+- `[x]` ContactFooter komponens elkészítése (Űrlap és elérhetőségek)
+- `[x]` Képek/Helykitöltők beállítása
+- `[x]` Fejlesztői szerver elindítása és ellenőrzés
