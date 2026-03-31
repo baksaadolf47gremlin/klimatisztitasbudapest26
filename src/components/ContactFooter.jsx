@@ -114,7 +114,7 @@ const ContactFooter = () => {
             
             {/* Logo & About */}
             <div className="md:col-span-2">
-              <Logo isScrolled={false} className="mb-6 scale-110 origin-left" />
+              <Logo isScrolled={false} showIcon={false} className="mb-6 scale-110 origin-left" />
               <p className="text-slate-400 text-sm leading-relaxed max-w-sm mb-8">
                 Professzionális klímatisztítás, karbantartás és javítás Budapesten és környékén. Precíz munkavégzés, garancia, és tiszta otthon minden beavatkozás után.
               </p>

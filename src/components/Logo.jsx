@@ -1,4 +1,4 @@
-const Logo = ({ className = '', isScrolled = true }) => {
+const Logo = ({ className = '', isScrolled = true, showIcon = true }) => {
   // Brand színek, melyek fehérek a sötét hero felett
   const darkBlue = isScrolled ? '#1e3a8a' : '#ffffff';
   // Világos kék: Görgetve erősebb (#0284c7 = sky-600) a jobb kontrasztért, Hero-n marad világos
@@ -28,14 +28,15 @@ const Logo = ({ className = '', isScrolled = true }) => {
     <div className={`flex items-center gap-3 select-none ${className} group`}>
 
       {/* Gyönyörű, absztrakt matematikai 3D csillag / turbina (Aerodynamic Star) */}
-      <svg
-        width="52"
-        height="52"
-        viewBox="0 0 100 100"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="flex-shrink-0 group-hover:scale-105 transition-transform duration-500"
-      >
+      {showIcon && (
+        <svg
+          width="52"
+          height="52"
+          viewBox="0 0 100 100"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="flex-shrink-0 group-hover:scale-105 transition-transform duration-500"
+        >
         <g strokeWidth="2" strokeLinejoin="round">
           {/* Felső: Sötétkék */}
           <StarBlade rotation={0} colorDark={darkBlue} colorLight={isScrolled ? '#3b82f6' : '#bfdbfe'} />
@@ -52,6 +53,7 @@ const Logo = ({ className = '', isScrolled = true }) => {
         {/* Középső tisztaság-mag (aperture hole vagy pötty) */}
         <circle cx="50" cy="50" r="4" fill={isScrolled ? "#ffffff" : "#1e3a8a"} className="transition-colors duration-300" />
       </svg>
+      )}
 
       {/* Hiper-prémium Szöveges Rész */}
       <div className="flex flex-col justify-center translate-y-0.5">
