@@ -4,23 +4,22 @@ import heroImg from '../assets/hero-bg.jpg';
 
 const Hero = () => {
   return (
-    <section className="relative flex items-center overflow-hidden bg-slate-900" style={{ minHeight: '88vh' }}>
+    <section className="relative flex items-center overflow-hidden bg-slate-900">
       
       {/* Háttérkép */}
       <div className="absolute inset-0 z-0">
         <img 
           src={heroImg} 
           alt="Professzionális klímatisztítás Budapest" 
-          className="w-full h-full object-cover object-[center_45%]"
-          style={{ opacity: 0.75 }}
+          className="w-full h-full object-cover object-[center_45%] opacity-95"
         />
         {/* Gradient CSAK a jobb oldalon – bal oldal szabad, ott látszik a szerelő arca */}
         <div className="absolute inset-0 bg-gradient-to-l from-brand-950/95 via-brand-900/75 to-transparent" style={{ left: '35%', right: 0, width: 'auto' }}></div>
         {/* Felső+alsó enyhe sötétítés */}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-slate-900/20"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 via-transparent to-slate-900/10"></div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 relative z-10 w-full py-28 lg:py-36">
+      <div className="max-w-7xl mx-auto px-6 lg:px-10 relative z-10 w-full pt-20 pb-20 lg:pt-28 lg:pb-32">
         {/* Tartalom a JOBB oldalon – bal oldal (szerelő arca) szabad */}
         <div className="max-w-xl ml-auto">
           <motion.div

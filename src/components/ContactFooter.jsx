@@ -1,7 +1,30 @@
-import { Mail, Phone, MapPin, Clock } from 'lucide-react';
+import { useState } from 'react';
+import { Mail, Phone, MapPin, Clock, ChevronDown } from 'lucide-react';
 import Logo from './Logo';
 
 const ContactFooter = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    address: '',
+    service: '',
+    message: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const getInputStyle = (fieldName, extraClasses = '') => {
+    const isFilled = formData[fieldName].trim().length > 0;
+    const base = `w-full shadow-inner rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition-all backdrop-blur-md ${extraClasses}`;
+    if (isFilled) {
+      return `${base} bg-brand-900/30 border border-brand-400 text-brand-300 shadow-[0_0_15px_rgba(14,165,233,0.15)]`;
+    }
+    return `${base} bg-slate-950/60 border border-white/20 text-white placeholder:text-slate-500`;
+  };
   return (
     <footer id="kapcsolat" className="bg-slate-900 text-slate-300 border-t border-slate-800">
       
@@ -61,38 +84,92 @@ const ContactFooter = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
                   <label className="block text-sm font-medium text-slate-300 mb-2">Név *</label>
-                  <input type="text" className="w-full bg-slate-950/60 border border-white/20 shadow-inner rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition-all placeholder:text-slate-500 backdrop-blur-md" placeholder="Kovács Géza" required />
+                  <input 
+                    name="name" 
+                    value={formData.name} 
+                    onChange={handleChange} 
+                    type="text" 
+                    className={getInputStyle('name')} 
+                    placeholder="Kovács Géza" 
+                    spellCheck="false"
+                    required 
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-300 mb-2">Mobil *</label>
-                  <input type="tel" className="w-full bg-slate-950/60 border border-white/20 shadow-inner rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition-all placeholder:text-slate-500 backdrop-blur-md" placeholder="+36 30 123 4567" required />
+                  <input 
+                    name="phone" 
+                    value={formData.phone} 
+                    onChange={handleChange} 
+                    type="tel" 
+                    className={getInputStyle('phone')} 
+                    placeholder="+36 30 123 4567" 
+                    spellCheck="false"
+                    required 
+                  />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
                   <label className="block text-sm font-medium text-slate-300 mb-2">E-mail *</label>
-                  <input type="email" className="w-full bg-slate-950/60 border border-white/20 shadow-inner rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition-all placeholder:text-slate-500 backdrop-blur-md" placeholder="pelda@email.hu" required />
+                  <input 
+                    name="email" 
+                    value={formData.email} 
+                    onChange={handleChange} 
+                    type="email" 
+                    className={getInputStyle('email')} 
+                    placeholder="pelda@email.hu" 
+                    spellCheck="false"
+                    required 
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-300 mb-2">Cím *</label>
-                  <input type="text" className="w-full bg-slate-950/60 border border-white/20 shadow-inner rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition-all placeholder:text-slate-500 backdrop-blur-md" placeholder="Budapest, XI. kerület" required />
+                  <input 
+                    name="address" 
+                    value={formData.address} 
+                    onChange={handleChange} 
+                    type="text" 
+                    className={getInputStyle('address')} 
+                    placeholder="Budapest, XI. kerület" 
+                    required 
+                  />
                 </div>
               </div>
               
               <div>
                 <label className="block text-sm font-medium text-slate-300 mb-2">Szolgáltatás típusa *</label>
-                <select defaultValue="" className="w-full bg-slate-950/60 border border-white/20 shadow-inner rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition-all backdrop-blur-md" required>
-                  <option value="" disabled className="bg-slate-900 text-slate-400">Kérem válasszon...</option>
-                  <option value="Klímatisztítás" className="bg-slate-900 text-white">Klímatisztítás</option>
-                  <option value="Klíma karbantartás" className="bg-slate-900 text-white">Klíma karbantartás</option>
-                  <option value="Klímajavítás" className="bg-slate-900 text-white">Klímajavítás</option>
-                </select>
+                <div className="relative">
+                  <select 
+                    name="service" 
+                    value={formData.service} 
+                    onChange={handleChange} 
+                    className={getInputStyle('service', 'appearance-none pr-12')} 
+                    required
+                  >
+                    <option value="" disabled hidden className="bg-slate-900 text-slate-400">Kérem válasszon...</option>
+                    <option value="Klímatisztítás" className="bg-slate-900 text-white">Klímatisztítás</option>
+                    <option value="Klíma karbantartás" className="bg-slate-900 text-white">Klíma karbantartás</option>
+                    <option value="Klímajavítás" className="bg-slate-900 text-white">Klímajavítás</option>
+                  </select>
+                  <div className={`pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4 transition-colors ${formData.service ? 'text-brand-300' : 'text-slate-400'}`}>
+                    <ChevronDown className="w-5 h-5 drop-shadow-sm" />
+                  </div>
+                </div>
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-slate-300 mb-2">Üzenet *</label>
-                <textarea rows="4" className="w-full bg-slate-950/60 border border-white/20 shadow-inner rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition-all placeholder:text-slate-500 backdrop-blur-md resize-none" placeholder="Klímatisztításra lenne szükségem a nappaliban..." required></textarea>
+                <textarea 
+                  name="message" 
+                  value={formData.message} 
+                  onChange={handleChange} 
+                  rows="4" 
+                  className={getInputStyle('message', 'resize-none')} 
+                  placeholder="Klímatisztításra lenne szükségem a nappaliban..." 
+                  required
+                ></textarea>
               </div>
               
               <button className="w-full bg-gradient-to-r from-brand-600 to-brand-400 hover:from-brand-500 hover:to-brand-300 text-white font-bold py-4 rounded-xl transition-all shadow-[0_0_20px_rgba(14,165,233,0.3)] hover:shadow-[0_0_30px_rgba(14,165,233,0.5)] active:scale-[0.98] mt-2">

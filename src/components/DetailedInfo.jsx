@@ -168,7 +168,7 @@ const DetailedInfo = () => {
               "Aki az otthonában, az irodában, vagy az autójában klímát használ már tudja, hogy a klíma rendszeres karbantartása és tisztítása elkerülhetetlen. A klímatisztítás elhanyagolása számos egészségügyi veszélyt rejt magában."
             </p>
             
-            <div className="mt-8 pt-8 border-t border-brand-200/50 relative z-10">
+            <div className="mt-10 relative z-10">
               <p className="font-bold text-brand-600 uppercase tracking-widest text-xs mb-2">
                 Fontos Emlékeztető
               </p>

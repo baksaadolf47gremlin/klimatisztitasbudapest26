@@ -58,14 +58,31 @@ const services = [
 
 const Services = () => {
   return (
-    <section id="szolgaltatasok" className="py-24 bg-white relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="szolgaltatasok" className="pb-24 pt-12 md:pt-16 bg-white relative z-20 mt-12 md:mt-16">
+      
+      {/* TAB (Fülecske) */}
+      <div className="absolute left-1/2 -translate-x-1/2 bottom-[calc(100%-1px)] bg-white px-6 md:px-12 pt-5 md:pt-6 pb-4 rounded-t-3xl w-[90%] md:w-auto min-w-[280px] max-w-[80%] text-center flex flex-col items-center">
         
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-brand-600 font-bold uppercase tracking-wide text-sm mb-2">Szolgáltatásaink</h2>
-          <h3 className="text-3xl md:text-5xl font-display font-bold text-slate-900 mb-6">
-            Miben tudunk segíteni?
-          </h3>
+        {/* Finomabb inverz kerekítési trükk */}
+        <div className="absolute bottom-0 -left-4 w-4 h-4 pointer-events-none overflow-hidden">
+          <div className="absolute -top-4 -left-4 w-8 h-8 bg-transparent rounded-full shadow-[8px_8px_0_8px_white]"></div>
+        </div>
+        <div className="absolute bottom-0 -right-4 w-4 h-4 pointer-events-none overflow-hidden">
+          <div className="absolute -top-4 -right-4 w-8 h-8 bg-transparent rounded-full shadow-[-8px_8px_0_8px_white]"></div>
+        </div>
+
+        <h2 className="text-brand-500 font-bold uppercase tracking-[0.15em] text-[10px] md:text-xs mb-1.5 opacity-90">Szolgáltatásaink</h2>
+        <h3 className="text-2xl md:text-3xl font-display font-bold text-slate-800">
+          Miben tudunk segíteni?
+        </h3>
+        {/* Elegáns elválasztó pötty */}
+        <div className="w-1.5 h-1.5 bg-brand-400 rounded-full mt-3 opacity-50"></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-0 md:pt-4">
+        
+        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
+
           <p className="text-lg text-slate-600">
             Daikin, Gree, Midea, Samsung és egyéb márkák profi karbantartása, tisztítása és szervizelése azonnal.
           </p>

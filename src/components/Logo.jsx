@@ -1,18 +1,18 @@
-const Logo = ({ className = '', isScrolled = true, showIcon = true }) => {
-  // Brand színek, melyek fehérek a sötét hero felett
-  const darkBlue = isScrolled ? '#1e3a8a' : '#ffffff';
+const Logo = ({ className = '', isScrolled = true, showIcon = true, pureWhite = false }) => {
+  // Brand színek, melyek fehérek a sötét hero felett vagy pureWhite módban
+  const darkBlue = (isScrolled && !pureWhite) ? '#1e3a8a' : '#ffffff';
   // Világos kék: Görgetve erősebb (#0284c7 = sky-600) a jobb kontrasztért, Hero-n marad világos
-  const lightBlue = isScrolled ? '#0284c7' : '#e0f2fe';
+  const lightBlue = (isScrolled && !pureWhite) ? '#0284c7' : '#e0f2fe';
 
   // Zöld: Görgetve sötétebb (lime-600/700) kell a fehér (üveg) háttéren a kontraszthoz
-  const greenDark = isScrolled ? '#4d7c0f' : '#84cc16'; // lime-700 / lime-500
-  const greenLight = isScrolled ? '#65a30d' : '#a3e635'; // lime-600 / lime-400
+  const greenDark = (isScrolled && !pureWhite) ? '#4d7c0f' : '#ffffff'; // pureWhite esetén fehér
+  const greenLight = (isScrolled && !pureWhite) ? '#65a30d' : '#ffffff'; // pureWhite esetén fehér
 
   // Jobb olvashatóság érdekében erősebb színek és árnyékok
-  const textColorBlue = isScrolled ? 'text-brand-900' : 'text-white drop-shadow-[0_3px_8px_rgba(0,0,0,0.85)]';
+  const textColorBlue = (isScrolled && !pureWhite) ? 'text-brand-900' : 'text-white drop-shadow-[0_3px_8px_rgba(0,0,0,0.85)]';
   // Fehér/világos háttéren (görgetve) sötétebb zöld (lime-700) kell a kontraszthoz
-  const textColorGreen = isScrolled ? 'text-lime-700 font-black tracking-tight' : 'text-lime-400 drop-shadow-[0_4px_10px_rgba(0,0,0,0.85)] font-black tracking-tight';
-  const textColorGray = isScrolled ? 'text-brand-800 font-bold' : 'text-slate-200 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] font-bold';
+  const textColorGreen = (isScrolled && !pureWhite) ? 'text-lime-700 font-black tracking-tight' : 'text-white drop-shadow-[0_4px_10px_rgba(0,0,0,0.85)] font-black tracking-tight';
+  const textColorGray = (isScrolled && !pureWhite) ? 'text-brand-800 font-bold' : 'text-slate-100 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] font-bold';
 
   // Egy "origami" vagy turbina lapát, ami egy 5-ágú csillagot ad ki
   const StarBlade = ({ rotation, colorDark, colorLight }) => (
@@ -39,19 +39,19 @@ const Logo = ({ className = '', isScrolled = true, showIcon = true }) => {
         >
         <g strokeWidth="2" strokeLinejoin="round">
           {/* Felső: Sötétkék */}
-          <StarBlade rotation={0} colorDark={darkBlue} colorLight={isScrolled ? '#3b82f6' : '#bfdbfe'} />
+          <StarBlade rotation={0} colorDark={darkBlue} colorLight={pureWhite ? '#ffffff' : (isScrolled ? '#3b82f6' : '#bfdbfe')} />
           {/* Jobb felső: Világoskék (Légörvény / Frissesség utalás) */}
-          <StarBlade rotation={72} colorDark={lightBlue} colorLight={isScrolled ? '#38bdf8' : '#e0f2fe'} />
+          <StarBlade rotation={72} colorDark={lightBlue} colorLight={pureWhite ? '#ffffff' : (isScrolled ? '#38bdf8' : '#e0f2fe')} />
           {/* Jobb alsó: Sötétkék */}
-          <StarBlade rotation={144} colorDark={darkBlue} colorLight={isScrolled ? '#3b82f6' : '#bfdbfe'} />
+          <StarBlade rotation={144} colorDark={darkBlue} colorLight={pureWhite ? '#ffffff' : (isScrolled ? '#3b82f6' : '#bfdbfe')} />
           {/* Bal alsó: Zöld */}
-          <StarBlade rotation={216} colorDark={greenDark} colorLight={greenLight} />
+          <StarBlade rotation={216} colorDark={greenDark} colorLight={pureWhite ? '#ffffff' : greenLight} />
           {/* Bal felső: Zöld */}
-          <StarBlade rotation={288} colorDark={greenDark} colorLight={greenLight} />
+          <StarBlade rotation={288} colorDark={greenDark} colorLight={pureWhite ? '#ffffff' : greenLight} />
         </g>
 
         {/* Középső tisztaság-mag (aperture hole vagy pötty) */}
-        <circle cx="50" cy="50" r="4" fill={isScrolled ? "#ffffff" : "#1e3a8a"} className="transition-colors duration-300" />
+        <circle cx="50" cy="50" r="4" fill={pureWhite ? "#ffffff" : (isScrolled ? "#ffffff" : "#1e3a8a")} className="transition-colors duration-300" />
       </svg>
       )}
 
@@ -61,8 +61,8 @@ const Logo = ({ className = '', isScrolled = true, showIcon = true }) => {
           <span className={`${textColorBlue} transition-all duration-500`}>KLÍMA</span>
           <span className={`${textColorGreen} transition-all duration-500 ml-0.5 relative`}>
             TISZTÍTÁS
-            {/* Opcionális mikrovonal, ami összeköti a modernséget */}
-            {isScrolled && <span className="absolute -bottom-1 left-0 w-full h-[3px] bg-gradient-to-r from-lime-500 to-transparent rounded-full opacity-50"></span>}
+            {/* Opcionális mikrovonal, ami összeköti a modernséget - pureWhite esetén nem kell */}
+            {isScrolled && !pureWhite && <span className="absolute -bottom-1 left-0 w-full h-[3px] bg-gradient-to-r from-lime-500 to-transparent rounded-full opacity-50"></span>}
           </span>
         </div>
 

@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Phone, Wind } from 'lucide-react';
+import { Menu, X, Phone } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 import Logo from './Logo';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const location = useLocation();
 
   // Görgetésfigyelő a zsugorodó ragadós fejléchez
   useEffect(() => {
@@ -15,13 +18,18 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Automatikus görgetés a tetejére oldalváltáskor
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   const navLinks = [
-    { name: 'Klímatisztítás', href: '#szolgaltatasok' },
-    { name: 'Klímajavítás', href: '#javitas' },
-    { name: 'Fűtési szezon előtti klímatisztítás', href: '#karbantartas' },
-    { name: 'Áraink', href: '#arak' },
-    { name: 'Galéria', href: '#galeria' },
-    { name: 'Kapcsolat', href: '#kapcsolat' },
+    { name: 'Klímatisztítás', href: '/', sectionId: 'szolgaltatasok' },
+    { name: 'Klímajavítás', href: '/karbantartas' },
+    { name: 'Karbantartás', href: '/karbantartas' },
+    { name: 'Áraink', href: '/karbantartas' },
+    { name: 'Galéria', href: '/', sectionId: 'galeria' },
+    { name: 'Kapcsolat', href: '/', sectionId: 'kapcsolat' },
   ];
 
   return (
@@ -36,25 +44,25 @@ const Navbar = () => {
         <div className="flex justify-between items-center">
           
           {/* Logo Szekció */}
-          <div className="flex items-center cursor-pointer">
+          <Link to="/" className="flex items-center cursor-pointer">
             <Logo isScrolled={isScrolled} />
-          </div>
+          </Link>
 
           {/* Asztali menü */}
           <div className="hidden lg:flex items-center gap-4 xl:gap-8">
             <div className="flex gap-3 xl:gap-6">
               {navLinks.map((link) => (
-                <a 
+                <Link 
                   key={link.name} 
-                  href={link.href}
-                  className={`text-[15px] xl:text-base font-semibold transition-all duration-300 whitespace-nowrap ${
+                  to={link.href}
+                  className={`text-[14px] xl:text-base font-semibold transition-all duration-300 whitespace-nowrap ${
                     isScrolled 
                       ? 'text-slate-800 hover:text-brand-600' 
                       : 'text-white hover:text-lime-400 drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]'
                   }`}
                 >
                   {link.name}
-                </a>
+                </Link>
               ))}
             </div>
             
@@ -83,14 +91,14 @@ const Navbar = () => {
         <div className="lg:hidden absolute top-full left-0 w-full bg-white shadow-xl border-t border-slate-100">
           <div className="px-4 pt-2 pb-6 space-y-1">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.name}
-                href={link.href}
+                to={link.href}
                 className="block px-3 py-4 text-base font-medium text-slate-800 hover:text-brand-600 hover:bg-slate-50 border-b border-slate-50"
                 onClick={() => setIsOpen(false)}
               >
                 {link.name}
-              </a>
+              </Link>
             ))}
             <a 
               href="tel:+36307736439" 

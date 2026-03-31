@@ -1,13 +1,19 @@
 import { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Services from './components/Services';
 import DetailedInfo from './components/DetailedInfo';
 import FAQ from './components/FAQ';
+import Gallery from './components/Gallery';
 import Testimonials from './components/Testimonials';
 import ContactFooter from './components/ContactFooter';
+import MaintenancePage from './pages/MaintenancePage';
 
-function App() {
+function AppContent() {
+  const location = useLocation();
+  const isMaintenancePage = location.pathname === '/karbantartas';
+
   // Inicializáljuk a Google Fontokat dinamikusan az oldalfejben a prémium kinézetért
   useEffect(() => {
     const link = document.createElement('link');
@@ -22,15 +28,31 @@ function App() {
       <Navbar />
       
       <main className="flex-grow">
-        <Hero />
-        <Services />
-        <DetailedInfo />
-        <FAQ />
-        <Testimonials />
+        <Routes>
+          <Route path="/" element={
+            <>
+              <Hero />
+              <Services />
+              <DetailedInfo />
+              <Gallery />
+              <FAQ />
+              <Testimonials />
+            </>
+          } />
+          <Route path="/karbantartas" element={<MaintenancePage />} />
+        </Routes>
       </main>
 
-      <ContactFooter />
+      {!isMaintenancePage && <ContactFooter />}
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <AppContent />
+    </Router>
   );
 }
 

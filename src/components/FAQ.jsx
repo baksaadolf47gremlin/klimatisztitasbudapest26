@@ -77,12 +77,12 @@ const FAQ = () => {
               >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : index)}
-                  className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none"
+                  className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none group"
                 >
-                  <span className={`font-bold text-lg pr-8 transition-colors ${isOpen ? 'text-brand-600' : 'text-slate-800'}`}>
+                  <span className={`font-bold text-lg pr-8 transition-colors ${isOpen ? 'text-brand-600' : 'text-slate-800 group-hover:text-brand-600'}`}>
                     {faq.q}
                   </span>
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 ${isOpen ? 'bg-brand-100 text-brand-600 rotate-180' : 'bg-slate-100 text-slate-400'}`}>
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 ${isOpen ? 'bg-brand-500 text-white rotate-180 shadow-md shadow-brand-500/20' : 'bg-brand-50 text-brand-500 group-hover:bg-brand-100 group-hover:text-brand-600'}`}>
                     <ChevronDown className="w-5 h-5" />
                   </div>
                 </button>
